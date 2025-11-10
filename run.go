@@ -43,7 +43,7 @@ func RunWeeklyChallenge(runSolution func(inputs any) (any, error), inputsExample
         // run it and show the results
         result, err := runSolution(inputs)
         if err != nil {
-            fmt.Printf("Exception: %v", err)
+            fmt.Printf("Exception: %v\n", err)
             continue
         } else {
             fmt.Printf("Output: %v\n", result)
