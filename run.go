@@ -7,7 +7,7 @@ import (
     "github.com/kaptinlin/jsonschema"
 )
 
-func RunWeeklyChallenge(runSolution func(inputs any) (any, error), inputsExample string, inputsSchemaJSON string) () {
+func RunWeeklyChallenge(runSolution func(inputs any) (string, error), inputsExample string, inputsSchemaJSON string) () {
 
     // compile the schema for json inputs args
     inputsSchema, err := jsonschema.NewCompiler().Compile([]byte(inputsSchemaJSON))
@@ -23,7 +23,7 @@ func RunWeeklyChallenge(runSolution func(inputs any) (any, error), inputsExample
         // show the inputs
         fmt.Printf("Inputs: %s\n", inputsJSON)
 
-        // validate the json input contains what we expect
+        // validate the inputs json contains what we expect
         validationResult := inputsSchema.Validate([]byte(inputsJSON))
         if ! validationResult.IsValid() {
             fmt.Printf("Error: invalid inputs: %v\n", validationResult.Error())
@@ -44,9 +44,8 @@ func RunWeeklyChallenge(runSolution func(inputs any) (any, error), inputsExample
         result, err := runSolution(inputs)
         if err != nil {
             fmt.Printf("Exception: %v\n", err)
-            continue
         } else {
-            fmt.Printf("Output: %v\n", result)
+            fmt.Printf("Output: %s\n", result)
         }
     }
 
@@ -59,11 +58,13 @@ func RunWeeklyChallenge(runSolution func(inputs any) (any, error), inputsExample
 
 // some helper functions
 
+// extract an attribute as an int
 func AsInt(inputs any, key string) int {
     inputsMap := inputs.(map[string]any)
     return int(inputsMap[key].(float64))
 }
 
+// extract an attribute as a slice of ints
 func AsIntSlice(inputs any, key string) []int {
     inputsMap := inputs.(map[string]any)
     inputSlice := inputsMap[key].([]any)
