@@ -67,8 +67,13 @@ func AsInt(inputs any, key string) int {
 // extract an attribute as a slice of ints
 func AsIntSlice(inputs any, key string) []int {
     inputsMap := inputs.(map[string]any)
-    inputSlice := inputsMap[key].([]any)
-    var result = make([]int, len(inputSlice))
+    return InputsAsIntSlice(inputsMap[key])
+}
+
+// entire inputs as a slice of ints
+func InputsAsIntSlice(inputs any) []int {
+    inputSlice := inputs.([]any)
+    result := make([]int, len(inputSlice))
     for i, v := range inputSlice {
         result[i] = int(v.(float64))
     }
