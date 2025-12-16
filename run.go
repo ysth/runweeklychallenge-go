@@ -79,3 +79,13 @@ func InputsAsIntSlice(inputs any) []int {
     }
     return result
 }
+
+// entire inputs as a slice of strings
+func InputsAsStringSlice(inputs any) []string {
+    inputSlice := inputs.([]any)
+    result := make([]string, len(inputSlice))
+    for i, v := range inputSlice {
+        result[i] = v.(string)
+    }
+    return result
+}
