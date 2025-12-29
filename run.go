@@ -70,6 +70,12 @@ func AsIntSlice(inputs any, key string) []int {
     return InputsAsIntSlice(inputsMap[key])
 }
 
+// extract an attribute as a slice of strings
+func AsStringSlice(inputs any, key string) []string {
+    inputsMap := inputs.(map[string]any)
+    return InputsAsStringSlice(inputsMap[key])
+}
+
 // entire inputs as a slice of ints
 func InputsAsIntSlice(inputs any) []int {
     inputSlice := inputs.([]any)
