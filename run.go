@@ -95,3 +95,12 @@ func InputsAsStringSlice(inputs any) []string {
     }
     return result
 }
+
+// JSON encode output
+func JSONEncode(inputs any) string {
+    json, err := json.Marshal(inputs)
+    if err != nil {
+        return fmt.Sprintf("JSON encoding error: %v", err)
+    }
+    return string(json)
+}
