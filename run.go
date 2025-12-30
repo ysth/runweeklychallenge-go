@@ -76,6 +76,17 @@ func AsStringSlice(inputs any, key string) []string {
     return InputsAsStringSlice(inputsMap[key])
 }
 
+// extract an attribute as a slice of slices of any
+func AsSliceSlice(inputs any, key string) [][]any {
+    inputsMap := inputs.(map[string]any)
+    value := inputsMap[key].([]any)
+    result := make([][]any, len(value))
+    for i, v := range value {
+        result[i] = v.([]any)
+    }
+    return result
+}
+
 // entire inputs as a slice of ints
 func InputsAsIntSlice(inputs any) []int {
     inputSlice := inputs.([]any)
