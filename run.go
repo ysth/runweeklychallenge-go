@@ -64,6 +64,12 @@ func AsInt(inputs any, key string) int {
     return int(inputsMap[key].(float64))
 }
 
+// extract an attribute as a string
+func AsString(inputs any, key string) string {
+    inputsMap := inputs.(map[string]any)
+    return inputsMap[key].(string)
+}
+
 // extract an attribute as a slice of ints
 func AsIntSlice(inputs any, key string) []int {
     inputsMap := inputs.(map[string]any)
